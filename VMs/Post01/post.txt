@@ -1,0 +1,40 @@
+There are two main ways to programatically manage your Azure resources, which in my opinion are both way better in the long run than the GUI (Azure Portal).
+
+- Azure CLI (https://docs.microsoft.com/pl-pl/cli/azure/what-is-azure-cli?view=azure-cli-latest)
+- Azure PowerShell (https://docs.microsoft.com/pl-pl/powershell/azure/?view=azps-4.3.0)
+
+Using one of these instead of the GUI, among other things, brings the following benefits:
+- automation - loops, script reusage
+- recovery - script execution instead of going through GUI steps from scratch
+- documentation - well-commented script does not need an additional explanation
+- versioning, shareability, learning effectiveness...
+
+In this post you'll find how to start using Azure PowerShell to manage your resources.
+
+Azure PowerShell is a set of cmdlets for managing Azure resources directly from the PowerShell command line. It is designed to make it easy to learn and get started with, but provides powerful features for automation.
+
+The Azure PowerShell module is now on it’s 3rd iteration. In this post we'll use the latest cross-platform Az module - the successor of Azure and AzureRM modules, which are both not developed anymore. So if you do not hava a really good reason to use them - pick the Az module.
+
+The first step is to check if Az modules are available on your machine. If not, start with the installation. You can install the whole Az module, which is quite heavy, or pick only the needed submodules - like e.g. Az.Compute or Az.Sql.
+
+[KOD 00]
+
+When everything is installed start with connecting to your account and iterating through all available resources:
+
+[KOD 01]
+
+Create a basic Windows Virtual Machine:
+
+[KOD 02]
+
+Create a SQL Server and a sample Database:
+
+[KOD 03]
+
+
+
+
+Compare Portal, CLI & PS:
+https://www.techwatching.dev/posts/welcome-azure-cli
+https://millerb.co.uk/2019/12/07/Az-CLI-vs-Az-PowerShell.html
+https://www.msp360.com/resources/blog/azure-cli-vs-powershell/

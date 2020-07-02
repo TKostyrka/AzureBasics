@@ -2,29 +2,29 @@
 #   Create a simple Win VM
 #   Everything set to default
 #   
-#-------------------------
+# -------------------------
 
 #   Connect to Azure + Set Subscription
-#-------------------------
+# -------------------------
 
     #Connect-AzAccount
 
     Get-AzSubscription
     Set-AzContext -Subscription 'Visual Studio Enterprise'
 
-#-------------------------
+# -------------------------
 
     Get-AzResourceGroup | Select-Object ResourceGroupName, Location
     Get-AzResource | Select-Object Name, ResourceType, ResourceGroupName
     Get-AzVm | Format-Table
 
 #   Variables
-#-------------------------
+# -------------------------
 
-    $LocName = "westeurope"
+    $LocName    = "westeurope"
     $ResGrpName = "RGVMs"
-    $AdminUser = "xtokoadm"
-    $AdminPass = "xtokodummyP@ss"
+    $AdminUser  = "xtokoadm"
+    $AdminPass  = "xtokodummyP@ss"
 
 #   (Re)Create ResourceGroup
 # -------------------------

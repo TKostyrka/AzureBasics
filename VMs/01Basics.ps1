@@ -1,22 +1,42 @@
+
+#   Create a Linux Ubuntu VM
+#   
+# -------------------------
+
+    #to-do
+    # - auto shutdown
+    # - configure DNS
+
 #   Connect
-#-------------------------
+# -------------------------
 
     Connect-AzAccount
 
     Get-AzSubscription
     Set-AzContext -Subscription 'Visual Studio Enterprise'
 
-#-------------------------
+# -------------------------
 
     Get-AzResourceGroup | Select-Object ResourceGroupName, Location
     Get-AzResource | Select-Object Name, ResourceType, ResourceGroupName
     Get-AzVm | Format-Table
 
-#   (Re)Create ResourceGroup
+#   Variables
 # -------------------------
 
-    $LocName = "westeurope"
-    $ResGrpName = "RGVMs"
+    $LocName      = "westeurope"
+    $ResGrpName   = "RGVMs"
+
+    $VNSubnetName = "VNSubnet"
+    $VNetName     = "myVNET"
+    $VMName       = "LinuxVM"
+
+    $AdminUser    = "xtokoadm"
+    $AdminPass    = "xtokodummyP@ss"
+
+
+#   (Re)Create ResourceGroup
+# -------------------------
 
     if(Get-AzResourceGroup | Where-Object {$_.ResourceGroupName -eq $ResGrpName})
     {
@@ -31,9 +51,6 @@
 
 #   SubNet, VNet, PublicIP
 # -------------------------
-
-    $VNSubnetName = "VNSubnet"
-    $VNetName = "myVNET"
 
     # Create a subnet configuration
     # -------------------------
@@ -112,12 +129,13 @@
 #   VMConfig
 # -------------------------
     
-    $VMName = "LinuxVM"
 
     # Define a credential object
     # -------------------------
-        $securePassword = ConvertTo-SecureString 'Pass@1234' -AsPlainText -Force
-        $cred = New-Object System.Management.Automation.PSCredential ("azureuser", $securePassword)
+        $AdminPassSec = ConvertTo-SecureString $AdminPass `
+                            -AsPlainText `
+                            -Force
+        $cred = New-Object System.Management.Automation.PSCredential ($AdminUser, $AdminPassSec)
 
     # Create a VM configuration
     # -------------------------
@@ -143,7 +161,6 @@
           -ResourceGroupName $ResGrpName  `
           -Location $LocName `
           -VM $vmConfig
-
 
 #   Check
 # -------------------------
