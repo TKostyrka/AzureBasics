@@ -1,0 +1,14 @@
+This post explains how to configure and create a Linux Virtual Machine with PowerShell.
+
+Chosing the VMImage the first thing to do. There are multiple cmdlets that allow to list all the available Publishers, Images, Versions ... I've picked latest version of Ubuntu Server 16.04-LTS provided by Canonical.
+
+Secondly, we need to pick a VM size. Different VM sizes are available in locations and some of them might not be available for the subscription used.
+
+When creating a Virtual Machine in Azure, multiple resources are also created in the background. Those are:
+
+Microsoft.Network/virtualNetworks
+Microsoft.Network/publicIPAddresses
+Microsoft.Network/networkSecurityGroups
+Microsoft.Network/networkInterfaces
+
+Instead of picking the default options, all the resources will be configured explicitly in the script.
