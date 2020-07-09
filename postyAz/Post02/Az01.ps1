@@ -112,6 +112,36 @@
                         -DestinationPortRange 80 `
                         -Access "Allow"
 
+# Create an inbound network security group rule for port 3389 
+# to enable connection via RDP
+# --------------------------------------------------------------------------
+
+    $NSRuleWeb = New-AzNetworkSecurityRuleConfig `
+                        -Name "NSGroupRuleRDP"  `
+                        -Protocol "*" `
+                        -Direction "Inbound" `
+                        -Priority 1002 `
+                        -SourceAddressPrefix * `
+                        -SourcePortRange * `
+                        -DestinationAddressPrefix * `
+                        -DestinationPortRange 3389 `
+                        -Access "Allow"
+
+# Create an inbound network security group rule for port 443 
+# to enable connection via SSL
+# --------------------------------------------------------------------------
+
+    $NSRuleWeb = New-AzNetworkSecurityRuleConfig `
+                        -Name "NSGroupRuleSSL"  `
+                        -Protocol "*" `
+                        -Direction "Inbound" `
+                        -Priority 1003 `
+                        -SourceAddressPrefix * `
+                        -SourcePortRange * `
+                        -DestinationAddressPrefix * `
+                        -DestinationPortRange 443 `
+                        -Access "Allow"
+
 # Network Security Group
 # --------------------------------------------------------------------------
 # https://azure.microsoft.com/pl-pl/blog/network-security-groups/
