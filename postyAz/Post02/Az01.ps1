@@ -18,7 +18,7 @@
 # --------------------------------------------------------------------------
 
     $LocName      = "westeurope"
-    $ResGrpName   = "RGVMs2"
+    $ResGrpName   = "RGVMs"
 
     $VMName       = "MyLinuxVM"
     $VMDomainName = "mylinuxvm$(Get-Random)"
@@ -116,7 +116,7 @@
 # to enable connection via RDP
 # --------------------------------------------------------------------------
 
-    $NSRuleWeb = New-AzNetworkSecurityRuleConfig `
+    $NSRuleRDP = New-AzNetworkSecurityRuleConfig `
                         -Name "NSGroupRuleRDP"  `
                         -Protocol "*" `
                         -Direction "Inbound" `
@@ -131,7 +131,7 @@
 # to enable connection via SSL
 # --------------------------------------------------------------------------
 
-    $NSRuleWeb = New-AzNetworkSecurityRuleConfig `
+    $NSRuleSSL = New-AzNetworkSecurityRuleConfig `
                         -Name "NSGroupRuleSSL"  `
                         -Protocol "*" `
                         -Direction "Inbound" `
@@ -152,7 +152,7 @@
                 -ResourceGroupName $ResGrpName `
                 -Location $LocName `
                 -Name "$($VMName)NetworkSG" `
-                -SecurityRules $NSRuleSSH,$NSRuleWeb
+                -SecurityRules $NSRuleSSH,$NSRuleWeb,$NSRuleRDP,$NSRuleSSL
 
 # Network Interface
 # --------------------------------------------------------------------------
